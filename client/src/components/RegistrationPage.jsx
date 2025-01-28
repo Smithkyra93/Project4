@@ -1,44 +1,65 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const bcrypt = require('bcryptjs');
+import React, {useState} from 'react'
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import axios from 'axios'
 
-const app = express();
-const port = 3000;
+export default function Signup() {
 
-// In-memory storage (for demo purposes only)
-let users = [];
+  const [formData, setFormData] = useState ({
+      user_name: "",
+      user_password: ""
+    })
+  
 
-app.use(bodyParser.json());
+    const handleChange = (event) => {
+      const name = event.target.name
+      const value = event.target.value
+      setFormData ({...formData, [name]: value})
+    }
+  
 
-// POST route for user registration
-app.post('/register', async (req, res) => {
-  const { username, password } = req.body;
 
-  if (!username || !password) {
-    return res.status(400).json({ error: 'Username and password are required' });
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log (formData)
+    const response = await axios.post ("http://localhost:3002/users/", formData)
+    console.log (response)
+
   }
 
-  // Check if user already exists
-  const existingUser = users.find(user => user.username === username);
-  if (existingUser) {
-    return res.status(400).json({ error: 'Username already exists' });
-  }
-
-  // Hash the password
-  const hashedPassword = await bcrypt.hash(password, 10);
-
-  // Store the new user
-  const newUser = { username, password: hashedPassword };
-  users.push(newUser);
-
-  res.status(201).json({ message: 'User registered successfully' });
-});
-
-// GET route to fetch all users (for demo)
-app.get('/users', (req, res) => {
-  res.json(users);
-});
-
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
+  return (
+    <>
+    <h1>Sign Up</h1>
+    <Form noValidate onSubmit={handleSubmit}>
+      <Row className="mb-3">
+        <Form.Group as={Col} md="4">
+          <Form.Label>Username</Form.Label>
+          <Form.Control
+            required
+            type="text"
+            placeholder="UserName"
+            name="user_name"
+            onChange = {handleChange}
+          />
+        </Form.Group>
+      </Row>
+      <Row className="mb-3">      
+        <Form.Group as={Col} md="4">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            required
+            type="password"
+            placeholder="Password"
+            name="user_password"
+            onChange = {handleChange}
+          />
+        </Form.Group>
+      </Row>
+      
+      <Button type="submit">Submit form</Button>
+    </Form>
+  </>
+  )
+}
