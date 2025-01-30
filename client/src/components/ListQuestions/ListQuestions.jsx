@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Table from 'react-bootstrap/Table';
 
 export default function ListQuestions({user}) {
   const [questions, setQuestions] = useState([]);
