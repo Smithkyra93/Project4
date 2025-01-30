@@ -13,7 +13,7 @@ app.use(cors({ origin: "http://localhost:3000" }));
 
 
 // Set the router endpoint
- app.use ('/users', userRouts)
+app.use ('/users', userRouts)
 app.use ('/questions', questionsRouts)
 // app.use ('/answers', answersRouts)
 
