@@ -19,8 +19,12 @@ Router.post('/', (req, res) => {
   const { question_id, user_id, answer_body } = req.body; // Get data from body
   db.query("INSERT INTO Answers (question_id, user_id, answer_body) VALUES (?, ?, ?)",[question_id, user_id, answer_body],
            (err, result) => {
-      if (err) res.status(500).send('Error adding student');
-      else res.status(201).send('Student added successfully');
+      if (err) {
+        res.status(500).send('Error adding Answer');
+        console.log (err)
+      }
+      
+      else res.status(201).send('Answer added successfully');
     }
   );
 });

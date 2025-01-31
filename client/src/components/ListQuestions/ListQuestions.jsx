@@ -3,7 +3,6 @@ import axios from 'axios'
 import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Table from 'react-bootstrap/Table';
 
 export default function ListQuestions({user}) {
   const [questions, setQuestions] = useState([]);
@@ -13,6 +12,7 @@ export default function ListQuestions({user}) {
   const handleSubmit = async (event, question_id) => {
 
     event.preventDefault();
+    console.log (question_id, user.user_id, answer_body)
     const response = await axios.post ("http://localhost:3002/questions/", {question_id, user_id:user.user_id, answer_body})
     console.log ("response: ", response)
   }

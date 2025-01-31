@@ -27,7 +27,7 @@ export default function Login({user, setUser}) {
         user_name: formData.user_name,
         user_password: formData.user_password,
       },})
-
+console.log (response)
       
       if ( response.data.length > 0 ) {        
         setUser((prevUser) => {
