@@ -1,10 +1,10 @@
 # Project4
-# Project4
 Kyra Smith
 
 Project was about technology. Being able to create a new project that contains a login, registration and questions and answers for user to experience. 
 User will have the ability to ask a questions and access answers provided from the server.
 
+Technologies used in the project are as follows: HTML, JavaScript, and CSS.
 ```
 CREATE TABLE `Answers` (
   `answer_id` int NOT NULL AUTO_INCREMENT,
